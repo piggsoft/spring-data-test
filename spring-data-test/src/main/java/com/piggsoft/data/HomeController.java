@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.piggsoft.data.dao.UserDao;
-import com.piggsoft.data.model.User;
 
 /**
  * Handles requests for the application home page.
@@ -39,9 +38,6 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		User user = new User();
-		user.setUsername(Math.random() * 10000 + "");
-		userDao.save(user);
 		return "home";
 	}
 	

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -45,5 +46,11 @@ public class UserController {
 	public List<User> search(Pageable pageable) {
 		Page<User> users = userService.search(pageable);
 		return users.getContent();
+	}
+	
+	@RequestMapping("/searchPage")
+	@ResponseBody
+	public Page<User> searchPage(@RequestBody Pageable pageable) {
+		return userService.search(pageable);
 	}
 }
