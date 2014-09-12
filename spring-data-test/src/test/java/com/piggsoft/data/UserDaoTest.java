@@ -44,4 +44,13 @@ public class UserDaoTest extends BaseTest{
 		System.out.println(users.getSize() + "|" + users.getNumberOfElements());
 	}
 	
+	@Test
+	public void testQuery2() {
+		User user = new User();
+		user.setUsername("username-1");
+		user.setPassword("password-1");
+		User result = userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+		System.out.println("=======ID:"+result.getId()+"======");
+	}
+	
 }
