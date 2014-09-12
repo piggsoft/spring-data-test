@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.piggsoft.data.exception.UserException;
 import com.piggsoft.data.model.User;
 import com.piggsoft.data.service.UserService;
 
@@ -15,8 +16,23 @@ public class UserController {
 	@RequestMapping("/register")
 	@ResponseBody
 	public User register(User user) {
-		System.out.println(user.getUsername());
-		System.out.println(user.getPassword());
+		try {
+		user = userService.register(user);
+		} catch (UserException e) {
+			return null;
+		}
 		return user;
+	}
+	
+	@RequestMapping("/login")
+	@ResponseBody
+	public String login(User user) {
+		User result = userService.login(user);
+		return result != null ? "SUCCESS---ID:" + result.getId() : "FAIL";
+	}
+	@RequestMapping("/modifyPassword")
+	@ResponseBody
+	public User modifyPassword(User user) {
+		return userService.modifyPassword(user);
 	}
 }

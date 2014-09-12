@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.piggsoft.data.dao.UserDao;
+import com.piggsoft.data.exception.UserException;
 import com.piggsoft.data.model.User;
 import com.piggsoft.data.service.UserService;
 
@@ -17,9 +18,13 @@ public class UserServiceImpl implements UserService {
 	
 	@Transactional
 	@Override
-	public void register(User user) {
+	public User register(User user) {
+		boolean isExist = accountHadRegister(user);
+		if (isExist) {
+			throw new UserException("account:\"" + user.getUsername() + "\"is already exist");
+		}
 		user.setPassword(encryptPassword(user.getPassword()));
-		userDao.save(user);
+		return userDao.save(user);
 	}
 
 	@Override
@@ -37,13 +42,20 @@ public class UserServiceImpl implements UserService {
 		return userDao.findByUsername(user.getUsername()) == null ? false : true;
 	}
 
-	@Override
-	public User validateUser(User user) {
-		return userDao.findByUsernameAndPassword(user.getUsername(), encryptPassword(user.getPassword()));
-	}
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
+	}
+
+	@Override
+	public User login(User user) {
+		return userDao.findByUsernameAndPassword(user.getUsername(), encryptPassword(user.getPassword()));
+	}
+
+	@Override
+	@Transactional
+	public User modifyPassword(User user) {
+		return userDao.save(user);
 	}
 
 }

@@ -25,15 +25,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.ServletWebRequest;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {
 		"file:src/main/webapp/WEB-INF/spring/root-context.xml",
 		"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
-// ?µM §A¥i¥H?©ú¤@?¨Æ?ºŞ²z ¨C??¤¸??³£?¦æ¨Æ?¦^? ??¦¨¥\ÉO§_
+// å½“ç„¶ ä½ å¯ä»¥å£°æ˜ä¸€ä¸ªäº‹åŠ¡ç®¡ç† æ¯ä¸ªå•å…ƒæµ‹è¯•éƒ½è¿›è¡Œäº‹åŠ¡å›æ»š æ— è®ºæˆåŠŸä¸å¦
 @TransactionConfiguration(defaultRollback = true)
-// ?±o­n¦bXML¤å¥ó¤¤?©ú¨Æ?®@~~~§Ú¬Oªö¥Îª`¸Ñªº¤è¦¡
+// è®°å¾—è¦åœ¨XMLæ–‡ä»¶ä¸­å£°æ˜äº‹åŠ¡å“¦~~~æˆ‘æ˜¯é‡‡ç”¨æ³¨è§£çš„æ–¹å¼
 @Transactional
 public abstract class BaseTest {
 
@@ -59,11 +58,11 @@ public abstract class BaseTest {
 
 	@Before
 	public void setup() {
-		// webAppContextSetup ª`·N¤W­±ªºstatic import
-		// webAppContextSetup ÌÛ³yªºWEB®e¾¹¥i¥H²K¥[fileter ¦ı¬O¤£¯à²K¥[listenCLASS
+		// webAppContextSetup æ³¨æ„ä¸Šé¢çš„static import
+		// webAppContextSetup æ„é€ çš„WEBå®¹å™¨å¯ä»¥æ·»åŠ fileter ä½†æ˜¯ä¸èƒ½æ·»åŠ listenCLASS
 		// WebApplicationContext context =
 		// ContextLoader.getCurrentWebApplicationContext();
-		// ¦pªG±±¨î¾¹¥]§t¦p¤W¤èªk ???ªÅ«ü?
+		// å¦‚æœæ§åˆ¶å™¨åŒ…å«å¦‚ä¸Šæ–¹æ³• åˆ™ä¼šæŠ¥ç©ºæŒ‡é’ˆ
 		this.mockMvc = webAppContextSetup(this.wac).build();
 	}
 }
