@@ -84,7 +84,9 @@
 		class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-
+	
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	
 	<jpa:repositories base-package="com.piggsoft.data.dao"
 		transaction-manager-ref="transactionManager"
 		entity-manager-factory-ref="entityManagerFactory"></jpa:repositories>

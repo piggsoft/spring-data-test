@@ -21,7 +21,7 @@
     <property name="file_debug_name" value="${LOG_HOME}/debug/debug.%d{yyyy-MM-dd}.log"></property> 
     
     <!-- 控制台输出 -->   
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
     	<!-- 日志输出编码 -->  
        	<Encoding>UTF-8</Encoding> 
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"> 
@@ -186,12 +186,12 @@
 	<logger name="org.springframework.web">
 		<level value="info" />
 	</logger>
-    <logger name="org.hibernate.type" level="ALL" />
-  <logger name="org.hibernate" level="DEBUG" />
+	
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
     
     <!-- 日志输出级别 -->
     <root level="INFO">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="console" />
         <appender-ref ref="file_fatal" />
         <appender-ref ref="file_error" />
         <appender-ref ref="file_warn" />
