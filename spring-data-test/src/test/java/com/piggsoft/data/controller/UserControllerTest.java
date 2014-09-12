@@ -70,4 +70,12 @@ public class UserControllerTest extends BaseTest {
 						"password", "123456q")).andDo(print());
 					
 	}
+	
+	@Test
+	public void testSearch() throws Exception{
+		mockMvc.perform(
+				post("/user/search").param("page.page", "2").param("page.size", "10").param(
+						"sort", "id,desc")).andDo(print());
+					
+	}
 }

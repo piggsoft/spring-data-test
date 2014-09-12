@@ -2,6 +2,8 @@ package com.piggsoft.data.service.impl;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,6 +58,11 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public User modifyPassword(User user) {
 		return userDao.save(user);
+	}
+
+	@Override
+	public Page<User> search(Pageable pageable) {
+		return userDao.findAll(pageable);
 	}
 
 }

@@ -1,5 +1,8 @@
 package com.piggsoft.data.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.piggsoft.data.model.User;
 
 public interface UserService {
@@ -9,4 +12,5 @@ public interface UserService {
 	boolean accountHadRegister(User user);
 	User login(User user);
 	User modifyPassword(User user);
+	Page<User> search(Pageable pageable);
 }
