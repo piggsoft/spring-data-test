@@ -18,6 +18,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	@Override
 	public void register(User user) {
+		user.setPassword(encryptPassword(user.getPassword()));
 		userDao.save(user);
 	}
 
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User validateUser(User user) {
-		return userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+		return userDao.findByUsernameAndPassword(user.getUsername(), encryptPassword(user.getPassword()));
 	}
 
 	public void setUserDao(UserDao userDao) {
