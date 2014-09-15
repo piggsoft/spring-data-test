@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2010-2011 The myBatis Team
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+        http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<configuration debug="false">
+    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->  
+    <property name="LOG_HOME" value="${log.path}" /> 
+    <property name="file_fatal_name" value="${LOG_HOME}/fatal/fatal.%d{yyyy-MM-dd}.log"></property> 
+    <property name="file_error_name" value="${LOG_HOME}/error/error.%d{yyyy-MM-dd}.log"></property> 
+    <property name="file_warn_name" value="${LOG_HOME}/warn/warn.%d{yyyy-MM-dd}.log"></property> 
+    <property name="file_info_name" value="${LOG_HOME}/info/info.%d{yyyy-MM-dd}.log"></property> 
+    <property name="file_debug_name" value="${LOG_HOME}/debug/debug.%d{yyyy-MM-dd}.log"></property> 
+    
+    <!-- 控制台输出 -->   
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    	<!-- 日志输出编码 -->  
+       	<Encoding>UTF-8</Encoding> 
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"> 
+             <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符--> 
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger - %msg%n</pattern>   
+        </encoder> 
+    </appender>
+    
+    <!-- 按照每天生成日志文件 -->   
+    <appender name="file_fatal"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<!-- 日志输出编码 -->  
+       	<Encoding>UTF-8</Encoding>
+       	<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"> 
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符--> 
+            <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern> --> 
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger - %msg%n</pattern>    
+        </encoder>  
+    	<!-- 级别过滤 -->
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">   
+      		<level>ERROR</level>   
+      		<onMatch>ACCEPT</onMatch>  <!-- 匹配时 --> 
+      		<onMismatch>DENY</onMismatch>   <!-- 不匹配时 -->
+    	</filter>   
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${file_fatal_name}</FileNamePattern> 
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>   
+        <!--日志文件最大的大小-->
+       <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+         <MaxFileSize>10MB</MaxFileSize>
+       </triggeringPolicy>
+    </appender> 
+    
+    <!-- 按照每天生成日志文件 -->   
+    <appender name="file_error"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<!-- 日志输出编码 -->  
+       	<Encoding>UTF-8</Encoding>
+       	<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"> 
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符--> 
+            <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern> --> 
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger - %msg%n</pattern>    
+        </encoder>  
+    	<!-- 级别过滤 -->
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">   
+      		<level>ERROR</level>   
+      		<onMatch>ACCEPT</onMatch>  <!-- 匹配时 --> 
+      		<onMismatch>DENY</onMismatch>   <!-- 不匹配时 -->
+    	</filter>   
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${file_error_name}</FileNamePattern> 
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>   
+        <!--日志文件最大的大小-->
+       <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+         <MaxFileSize>10MB</MaxFileSize>
+       </triggeringPolicy>
+    </appender> 
+    
+    <!-- 按照每天生成日志文件 -->   
+    <appender name="file_warn"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<!-- 日志输出编码 -->  
+       	<Encoding>UTF-8</Encoding>
+       	<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"> 
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符--> 
+            <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern> --> 
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger - %msg%n</pattern>    
+        </encoder>  
+    	<!-- 级别过滤 -->
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">   
+      		<level>ERROR</level>   
+      		<onMatch>ACCEPT</onMatch>  <!-- 匹配时 --> 
+      		<onMismatch>DENY</onMismatch>   <!-- 不匹配时 -->
+    	</filter>   
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${file_warn_name}</FileNamePattern> 
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>   
+        <!--日志文件最大的大小-->
+       <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+         <MaxFileSize>10MB</MaxFileSize>
+       </triggeringPolicy>
+    </appender> 
+    
+    <!-- 按照每天生成日志文件 -->   
+    <appender name="file_info"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<!-- 日志输出编码 -->  
+       	<Encoding>UTF-8</Encoding>
+       	<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"> 
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符--> 
+            <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern> --> 
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger - %msg%n</pattern>    
+        </encoder>  
+    	<!-- 级别过滤 -->
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">   
+      		<level>INFO</level>   
+      		<onMatch>ACCEPT</onMatch>  <!-- 匹配时 --> 
+      		<onMismatch>DENY</onMismatch>   <!-- 不匹配时 -->
+    	</filter>   
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${file_info_name}</FileNamePattern> 
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>   
+        <!--日志文件最大的大小-->
+       <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+         <MaxFileSize>10MB</MaxFileSize>
+       </triggeringPolicy>
+    </appender> 
+    
+    <!-- 按照每天生成日志文件 -->   
+    <appender name="file_debug"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<!-- 日志输出编码 -->  
+       	<Encoding>UTF-8</Encoding>
+       	<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"> 
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符--> 
+            <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern> --> 
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger - %msg%n</pattern>    
+        </encoder>  
+    	<!-- 级别过滤 -->
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">   
+      		<level>DEBUG</level>   
+      		<onMatch>ACCEPT</onMatch>  <!-- 匹配时 --> 
+      		<onMismatch>DENY</onMismatch>   <!-- 不匹配时 -->
+    	</filter>   
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${file_debug_name}</FileNamePattern> 
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>   
+        <!--日志文件最大的大小-->
+       <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+         <MaxFileSize>10MB</MaxFileSize>
+       </triggeringPolicy>
+    </appender> 
+    
+    <!-- Application Loggers -->
+	<logger name="com.piggsoft.user">
+		<level value="debug" />
+	</logger>
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.beans">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.context">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="info" />
+	</logger>
+	
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
+    
+    <!-- 日志输出级别 -->
+    <root level="INFO">
+        <appender-ref ref="console" />
+        <appender-ref ref="file_fatal" />
+        <appender-ref ref="file_error" />
+        <appender-ref ref="file_warn" />
+        <appender-ref ref="file_info" />
+        <appender-ref ref="file_debug" />
+    </root> 
+</configuration>

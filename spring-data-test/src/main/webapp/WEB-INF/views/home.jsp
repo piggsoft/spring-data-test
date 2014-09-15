@@ -27,7 +27,10 @@
 </div>
  <script>
     function UserController($scope, $http) {
-    	$http.get("user/searchPage", JSON.stringify({"page":{"page":4}})).success(function(data) {
+    	$http.get(
+    				"user/searchPage", 
+    				{params:{"page.page":4}}
+    	).success(function(data) {
     		$scope.data = data;
     		console.log(data)
     	});
