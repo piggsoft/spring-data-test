@@ -2,12 +2,15 @@ package com.piggsoft.data.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.piggsoft.data.exception.UserException;
@@ -48,9 +51,9 @@ public class UserController {
 		return users.getContent();
 	}
 	
-	@RequestMapping("/searchPage")
+	@RequestMapping(value="/searchPage")
 	@ResponseBody
-	public Page<User> searchPage(@RequestBody Pageable pageable) {
+	public Page<User> searchPage(HttpServletRequest request, @RequestBody Pageable pageable) {
 		return userService.search(pageable);
 	}
 }

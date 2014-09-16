@@ -27,9 +27,9 @@
 </div>
  <script>
     function UserController($scope, $http) {
-    	$http.get(
+    	$http.post(
     				"user/searchPage", 
-    				{params:{"page.page":4}}
+    				{"page":4}
     	).success(function(data) {
     		$scope.data = data;
     		console.log(data)

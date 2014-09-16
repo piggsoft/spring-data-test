@@ -184,7 +184,7 @@
 	</logger>
 
 	<logger name="org.springframework.web">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
     <!-- 日志输出级别 -->
